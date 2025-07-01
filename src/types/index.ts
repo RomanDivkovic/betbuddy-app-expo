@@ -10,7 +10,7 @@ export interface User {
 export interface GroupMember {
   userId: string;
   userName: string;
-  member: 'isAdmin' | 'member'; // Use existing member field structure
+  member: "isAdmin" | "member"; // Use existing member field structure
 }
 
 export interface Group {
@@ -42,13 +42,24 @@ export interface Post {
   edited?: boolean;
 }
 
+// Comment model for posts
+export interface Comment {
+  id: string;
+  postId: string;
+  userId: string;
+  userName: string;
+  content: string;
+  createdAt: string;
+  updatedAt?: string;
+}
+
 // Invitation to group
 export interface Invitation {
   id: string;
   groupId: string;
   groupName?: string;
   userEmail: string;
-  status: 'pending' | 'accepted' | 'declined';
+  status: "pending" | "accepted" | "declined";
   createdAt: string;
 }
 
@@ -67,11 +78,11 @@ export interface Match {
   eventId: string;
   fighter1: Fighter;
   fighter2: Fighter;
-  status: 'upcoming' | 'live' | 'completed';
+  status: "upcoming" | "live" | "completed";
   order: number;
   winnerId?: string;
   result?: {
-    winner: 'fighter1' | 'fighter2';
+    winner: "fighter1" | "fighter2";
     method: string;
   };
   type?: string; // Added to support 'Main event', 'Co-main', etc.
@@ -86,7 +97,7 @@ export interface Event {
   location?: string;
   groupId: string;
   matches: Match[];
-  status: 'upcoming' | 'live' | 'completed';
+  status: "upcoming" | "live" | "completed";
   imageUrl?: string;
   createdAt: string;
   isPartOfSeries?: boolean;
@@ -120,7 +131,7 @@ export interface Series {
   events: string[];
   startDate: string;
   endDate: string;
-  status: 'upcoming' | 'active' | 'completed';
+  status: "upcoming" | "active" | "completed";
   createdAt: string;
 }
 
@@ -170,7 +181,7 @@ export interface Bet {
   eventId?: string;
   matchId?: string;
   options: BetOption[];
-  status: 'open' | 'closed' | 'settled';
+  status: "open" | "closed" | "settled";
   createdAt: string;
   closesAt: string;
   settledAt?: string;
