@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,21 @@ import { useAuth } from '../context/AuthContext';
 export default function ProfileScreen() {
   const { currentUser, logout } = useAuth();
   const [loggingOut, setLoggingOut] = useState(false);
+  const [profile, setProfile] = useState<any>(null);
+  const [groups, setGroups] = useState<any[]>([]);
+  const [invitations, setInvitations] = useState<any[]>([]);
+  useEffect(() => {
+    if (!currentUser) return;
+    const load = async () => {
+      const prof = await fetchUserProfile(currentUser.uid);
+      setProfile(prof);
+      const grps = await fetchUserGroups();
+      setGroups(grps);
+      const invs = currentUser.email ? await fetchUserInvitations(currentUser.email) : [];
+      setInvitations(invs);
+    };
+    load();
+  }, [currentUser]);
 
   const handleLogout = async () => {
     Alert.alert(
@@ -43,16 +58,24 @@ export default function ProfileScreen() {
       <View style={styles.avatarContainer}>
         <View style={styles.avatar}>
           <Text style={styles.avatarText}>
-            {(currentUser?.displayName || currentUser?.email || 'U').charAt(0).toUpperCase()}
+            {(profile?.displayName || currentUser?.displayName || currentUser?.email || 'U').charAt(0).toUpperCase()}
           </Text>
         </View>
       </View>
       <Text style={styles.displayName}>
-        {currentUser?.displayName || 'User'}
+        {profile?.displayName || currentUser?.displayName || 'User'}
       </Text>
       <Text style={styles.email}>
-        {currentUser?.email}
+        {profile?.email || currentUser?.email}
       </Text>
+      <Text style={styles.email}>
+        Groups: {groups.length}
+      </Text>
+      {invitations.length > 0 && (
+        <Text style={styles.email}>
+          Invitations: {invitations.length}
+        </Text>
+      )}
     </View>
   );
 

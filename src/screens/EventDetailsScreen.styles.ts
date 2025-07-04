@@ -1,0 +1,110 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: "#f8fafc" },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f8fafc",
+  },
+  header: {
+    backgroundColor: "white",
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e5e7eb",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#1f2937",
+    marginBottom: 8,
+  },
+  date: { fontSize: 16, color: "#6b7280" },
+  card: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 12,
+    marginHorizontal: 16,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  fightHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  fightCategory: { fontSize: 14, color: "#2563eb", fontWeight: "600" },
+  fightersRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  fighter: { flex: 1, alignItems: "center" },
+  fighterName: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1f2937",
+    textAlign: "center",
+  },
+  vs: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#9ca3af",
+    marginHorizontal: 8,
+  },
+  empty: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 40,
+  },
+  emptyText: { fontSize: 18, color: "#9ca3af", fontWeight: "600" },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#1f2937",
+    margin: 16,
+    marginBottom: 8,
+  },
+  predictionContainer: {
+    marginTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: "#e5e7eb",
+    paddingTop: 12,
+  },
+  predictionButton: {
+    backgroundColor: "#e5e7eb",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  predictionButtonText: {
+    color: "#374151",
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  selectedPrediction: {
+    backgroundColor: "#2563eb",
+  },
+  selectedPredictionText: {
+    color: "white",
+  },
+  disabledPrediction: {
+    backgroundColor: "#9ca3af",
+    opacity: 0.7,
+  },
+  userPredictionText: {
+    marginTop: 8,
+    textAlign: "center",
+    color: "#6b7280",
+    fontStyle: "italic",
+    fontWeight: "bold",
+  },
+});
