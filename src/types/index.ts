@@ -27,6 +27,7 @@ export interface Group {
   series?: Record<string, Series>;
   bettingEnabled?: boolean;
   events?: Record<string, Event>;
+  ppvs?: Record<string, Event> | Event[];
 }
 
 // Post model inside group
@@ -88,6 +89,30 @@ export interface Match {
   type?: string; // Added to support 'Main event', 'Co-main', etc.
 }
 
+// A single fight from the MMA API
+export interface Fight {
+  id: number;
+  category: string;
+  date: string;
+  time: string;
+  timezone: string;
+  slug: string;
+  status: {
+    long: string;
+    short: string;
+  };
+  fighters: {
+    first: {
+      id: number;
+      name: string;
+    };
+    second: {
+      id: number;
+      name: string;
+    };
+  };
+}
+
 // Main event model used across app
 export interface Event {
   id: string;
@@ -104,6 +129,7 @@ export interface Event {
   seriesId?: string;
   externalId?: string;
   apiSlug?: string;
+  fights?: string[]; // Optional: array of fight IDs for API fetch (web parity)
 }
 
 // User prediction for a match

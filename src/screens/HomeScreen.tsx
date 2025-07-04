@@ -10,12 +10,15 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
 import { fetchUserGroups } from '../services/firebaseService';
-import { Group } from '../types';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
 
 export default function HomeScreen() {
   const { currentUser } = useAuth();
-  const [groups, setGroups] = useState<Group[]>([]);
+  const [groups, setGroups] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   useEffect(() => {
     loadData();
@@ -76,7 +79,11 @@ export default function HomeScreen() {
             </View>
           ) : (
             groups.slice(0, 3).map((group) => (
-              <TouchableOpacity key={group.id} style={styles.groupCard}>
+              <TouchableOpacity
+                key={group.id}
+                style={styles.groupCard}
+                onPress={() => navigation.navigate('GroupDetails', { groupId: group.id })}
+              >
                 <View style={styles.groupHeader}>
                   <Text style={styles.groupName}>{group.name}</Text>
                   <Text style={styles.memberCount}>
@@ -93,12 +100,18 @@ export default function HomeScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Quick Actions</Text>
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => navigation.navigate('Events')}
+          >
             <Ionicons name="calendar-outline" size={24} color="#2563eb" />
             <Text style={styles.actionText}>View Upcoming Events</Text>
             <Ionicons name="chevron-forward" size={20} color="#9ca3af" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionCard}>
+          <TouchableOpacity
+            style={styles.actionCard}
+            onPress={() => navigation.navigate('Leaderboards')}
+          >
             <Ionicons name="trophy-outline" size={24} color="#2563eb" />
             <Text style={styles.actionText}>Check Leaderboards</Text>
             <Ionicons name="chevron-forward" size={20} color="#9ca3af" />
