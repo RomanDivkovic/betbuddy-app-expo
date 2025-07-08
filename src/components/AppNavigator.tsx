@@ -16,6 +16,8 @@ import ProfileScreen from "../screens/ProfileScreen";
 import GroupDetailsScreen from "../screens/GroupDetailsScreen";
 import EventDetailsScreen from "../screens/EventDetailsScreen";
 import LoadingScreen from "../screens/LoadingScreen";
+import InvitationsScreen from "../screens/InvitationsScreen";
+import InvitationIndicator from "./InvitationIndicator";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -35,6 +37,8 @@ const MainTabs = () => {
             iconName = focused ? "calendar" : "calendar-outline";
           } else if (route.name === "Profile") {
             iconName = focused ? "person" : "person-outline";
+          } else if (route.name === "Invitations") {
+            iconName = focused ? "mail" : "mail-outline";
           } else {
             iconName = "help-outline";
           }
@@ -49,6 +53,7 @@ const MainTabs = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Groups" component={GroupsScreen} />
       <Tab.Screen name="Events" component={EventsScreen} />
+      <Tab.Screen name="Invitations" component={InvitationsScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
@@ -63,10 +68,18 @@ export default function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
         {currentUser ? (
           <>
-            <Stack.Screen name="Main" component={MainTabs} />
+            <Stack.Screen
+              name="Main"
+              component={MainTabs}
+              options={{
+                headerShown: true,
+                title: "BetBuddy",
+                headerRight: () => <InvitationIndicator />,
+              }}
+            />
             <Stack.Screen
               name="GroupDetails"
               component={GroupDetailsScreen}
@@ -79,7 +92,7 @@ export default function AppNavigator() {
             />
           </>
         ) : (
-          <Stack.Screen name="Auth" component={AuthScreen} />
+          <Stack.Screen name="Auth" component={AuthScreen} options={{ headerShown: false }}/>
         )}
       </Stack.Navigator>
     </NavigationContainer>
