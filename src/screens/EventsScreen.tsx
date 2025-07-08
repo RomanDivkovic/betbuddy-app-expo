@@ -73,7 +73,10 @@ const EventsScreen = () => {
         <View style={styles.eventHeader}>
           <Text style={styles.eventTitle}>{eventTitle}</Text>
           <View
-            style={[styles.statusBadge, { backgroundColor: getStatusColor(status) }]}
+            style={[
+              styles.statusBadge,
+              { backgroundColor: getStatusColor(status) },
+            ]}
           >
             <Text style={styles.statusText}>{getStatusLabel(status)}</Text>
           </View>
@@ -149,8 +152,12 @@ const EventsScreen = () => {
         renderItem={renderEventItem}
         keyExtractor={(item) => item.id}
         style={styles.listContainer}
-        ListEmptyComponent={<Text style={styles.emptyText}>No events found.</Text>}
-        refreshControl={<RefreshControl refreshing={loading} onRefresh={onRefresh} />}
+        ListEmptyComponent={
+          <Text style={styles.emptyText}>No events found.</Text>
+        }
+        refreshControl={
+          <RefreshControl refreshing={loading} onRefresh={onRefresh} />
+        }
       />
 
       <TouchableOpacity style={styles.fab} onPress={handleAddEventPress}>

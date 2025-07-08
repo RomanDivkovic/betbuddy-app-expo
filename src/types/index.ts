@@ -239,5 +239,6 @@ export type MainTabParamList = {
   Home: undefined;
   Groups: undefined;
   Events: undefined;
+  Invitations: undefined;
   Profile: undefined;
 };
